@@ -1,0 +1,30 @@
+{
+  "name": "zenlayer-ai-gateway",
+  "version": "1.0.0",
+  "description": "pi (pi-coding-agent) provider extension for the Zenlayer AI Gateway — an OpenAI-compatible gateway fronting OpenAI, Anthropic, GLM, Kimi, DeepSeek, Qwen, Grok, Gemini, MiniMax, and Perplexity. Auto-discovers models from /v1/models.",
+  "keywords": ["pi-package", "pi", "pi-coding-agent", "zenlayer", "ai-gateway", "openai-compatible", "provider"],
+  "license": "MIT",
+  "author": "Marko Stankovic <m@marko.la>",
+  "homepage": "https://github.com/markoinla/zenlayer-ai-gateway-pi#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markoinla/zenlayer-ai-gateway-pi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/markoinla/zenlayer-ai-gateway-pi/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "extensions",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": ["./extensions"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}
