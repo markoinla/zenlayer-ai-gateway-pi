@@ -12,13 +12,13 @@ A [pi](https://pi.dev) provider extension for the **Zenlayer AI Gateway** (`http
 
 ## Install
 
-### Local path (simplest, reusable across machines via copy or git)
+### From GitHub (recommended)
 
 ```bash
-pi install /Users/marko.stankovic/Desktop/PROJECTS/ZENLAYER/zenlayer-ai-gateway-pi
+pi install git:github.com/markoinla/zenlayer-ai-gateway-pi
 ```
 
-This adds an entry to `~/.pi/agent/settings.json` `packages`. Then set the API key and default:
+This adds an entry to `~/.pi/agent/settings.json` `packages`. Then set the API key and defaults:
 
 ```bash
 export ZENLAYER_AI_GATEWAY_API_KEY=sk-...
@@ -29,24 +29,21 @@ export ZENLAYER_AI_GATEWAY_API_KEY=sk-...
 {
   "defaultProvider": "zenlayer-ai-gateway",
   "defaultModel": "glm-5.2",
-  "defaultThinkingLevel": "medium",
-  "packages": [
-    "npm:pi-web-access",
-    "npm:@quintinshaw/pi-dynamic-workflows",
-    "/Users/marko.stankovic/Desktop/PROJECTS/ZENLAYER/zenlayer-ai-gateway-pi"
-  ]
+  "defaultThinkingLevel": "medium"
 }
 ```
 
 Restart pi (or `/reload`).
 
-### On another machine
+### Local path (development)
 
-1. Copy this directory (or `git clone` it).
-2. `pi install /path/to/zenlayer-ai-gateway-pi`.
-3. Set `ZENLAYER_AI_GATEWAY_API_KEY` in the environment.
-4. Set `defaultProvider`/`defaultModel` in `~/.pi/agent/settings.json`.
-5. Restart pi.
+If you're hacking on the extension from a working copy:
+
+```bash
+pi install /Users/marko.stankovic/Desktop/PROJECTS/ZENLAYER/zenlayer-ai-gateway-pi
+```
+
+Edit `extensions/zenlayer-ai-gateway.ts`, then `/reload` to pick up changes — no commit or push required.
 
 > The key is read from the `ZENLAYER_AI_GATEWAY_API_KEY` env var. If pi has logged in the provider (`/login`), the key stored in `~/.pi/agent/auth.json` overrides the env var for requests **and** is used as a fallback for the `/v1/models` discovery fetch when the env var is unset.
 
@@ -55,13 +52,3 @@ Restart pi (or `/reload`).
 - Costs are **vendor list prices** (USD per 1M tokens), treated as estimates — the gateway does not expose its actual billing. The pi footer cost figure is approximate.
 - Context windows and max output tokens are sourced from upstream vendor docs; where a gateway imposes a lower cap you will discover it via an error when exceeding it.
 - The gateway's `/v1/models` returns only `id` + `owned_by` (no metadata), which is why per-family rules live in this file.
-
-## Publish later (optional)
-
-To share via npm instead of a local path:
-
-```bash
-npm publish   # package is tagged "pi-package" so it appears in the pi gallery
-```
-
-Then install with `pi install npm:zenlayer-ai-gateway`.
